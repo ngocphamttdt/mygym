@@ -11,6 +11,9 @@
 # production
 /build
 
+# ignore environment variables
+.env
+
 # misc
 .DS_Store
 .env.local
@@ -21,3 +24,20 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+# ignore editor files
+*.swp
+*.swo
+*.swm
+*.swp
+*.swn
+*.swp
+*.swpx
+*.swx
+*.swo
+*.tmp
+.DS_Store
+.vscode/
+.idea/
+*.log

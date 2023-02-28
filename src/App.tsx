@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import { Fragment } from 'react';
+import { Route, Router, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './components/home/home';
+import Navbar from './components/navbar/navbar';
+import Product from './components/product/product';
+import * as repo from './db/repositories/product';
 
 function App() {
+
+  // const [products, setProducts] = useState<Array<repo.Product>>([])
+
+  // useEffect(() => {
+  //   fetchProducts()
+  // }, [])
+
+  // const fetchProducts = async () => {
+  //   setProducts([])
+  //   const _products = await repo.all()
+  //   setProducts(_products)
+  //   console.log('products', _products);
+
+  // }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Fragment>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/product' element={<Product />} />
+      </Routes>
+    </Fragment>
+  )
 }
 
 export default App;
+
+ // <div className="App">
+    //   <ul>
+    //     {products && products.map((item, key) => (<li key={key}>{item.code}- {item.name}</li>))}
+    //   </ul>
+    // </div>
