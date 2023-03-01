@@ -14,7 +14,6 @@ const Home: React.FC = () => {
   const fetchProducts = async () => {
     setProducts([])
     const _products = await repo.all()
-
     setProducts(_products)
 
   }

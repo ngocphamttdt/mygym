@@ -1,9 +1,7 @@
-// v9 compat packages are API compatible with v8 code
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import 'firebase/compat/firestore'
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
 
-const config = {
+const firebaseConfig = {
   apiKey: 'AIzaSyCzwnlQXTVY0ZdHMubk_J3mrstBRHPbZCs',
   authDomain: 'my-gym-ca7fb.firebaseapp.com',
   projectId: 'my-gym-ca7fb',
@@ -14,7 +12,7 @@ const config = {
 }
 
 // init app
-firebase.initializeApp(config)
+const app = initializeApp(firebaseConfig)
 
-// export default firestore
-export const db = (firebase as any).firestore()
+// Initialize Cloud Firestore and get a reference to the service
+export const db = getFirestore(app)
