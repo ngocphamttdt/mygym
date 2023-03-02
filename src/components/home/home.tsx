@@ -1,11 +1,12 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import * as repo from '../../db/repositories/product'
+import { IProduct } from "../models/productInterface";
+
 import ProductCard from "../product/productCard";
 
-
 const Home: React.FC = () => {
-  const [products, setProducts] = useState<Array<repo.Product>>([])
+  const [products, setProducts] = useState<Array<IProduct>>([])
 
   useEffect(() => {
     fetchProducts()
@@ -15,7 +16,6 @@ const Home: React.FC = () => {
     setProducts([])
     const _products = await repo.all()
     setProducts(_products)
-
   }
   return (
     <>
