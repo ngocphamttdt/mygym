@@ -9,27 +9,47 @@ import * as repo from '../../db/repositories/product'
 import * as categoryRepo from '../../db/repositories/category'
 import { IProduct } from '../models/productInterface';
 import { ICategory } from '../models/categoryInterface';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { ADD_PRODUCT, UPDATE_PRODUCT } from '../../store/constants/productConstants';
 
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required('Name is required')
+  name: Yup.string().required('Name is required'),
+  categoryId: Yup.string().required('Category is required'),
+  price: Yup.number().required('Price is required')
 
 });
+const initValues: IProduct = {
+  name: '',
+  code: 100,
+  categoryId: '',
+  desc: '',
+  price: 0,
+  url: ''
+};
 
 const ProductForm: React.FC = () => {
-  const [categoryOptions, setCategoryOptions] = useState<IObject[]>()
-  const handleSubmit = async (values: IProduct) => {
-    await repo.create(values)
-  }
+  const params: any = useParams()
+  const dispatch = useDispatch()
 
-  const initValues: IProduct = {
-    name: '',
-    code: 100,
-    categoryId: '',
-    desc: '',
-    price: 0,
-    url: ''
-  };
+  const [categoryOptions, setCategoryOptions] = useState<IObject[]>()
+  const categorySelector: IObject[] = useSelector((state: any) => state.category.data)
+  const productSelector: IProduct[] = useSelector((state: any) => state.products.data)
+
+  const [initProduct, setInitProduct] = useState<IProduct>(initValues)
+
+  const handleSubmit = async (values: IProduct) => {
+    if (Object.keys(params).length) {
+      await repo.update(params.id, values)
+      dispatch({ type: UPDATE_PRODUCT, payload: { ...values, id: params.id } as IProduct })
+
+    }
+    else {
+      const newProduct: IProduct = await repo.create(values)
+      dispatch({ type: ADD_PRODUCT, payload: newProduct })
+    }
+  }
 
   const fetchCategory = async () => {
     const _categories: ICategory[] = await categoryRepo.all()
@@ -45,7 +65,14 @@ const ProductForm: React.FC = () => {
   }
 
   useEffect(() => {
-    fetchCategory()
+    if (!categorySelector)
+      fetchCategory()
+    else setCategoryOptions(categorySelector)
+
+    if (Object.keys(params).length && productSelector) {
+      const selectedProduct = productSelector.find(x => x.id === params.id) as IProduct
+      setInitProduct(selectedProduct)
+    }
   }, [])
 
   return (
@@ -58,7 +85,7 @@ const ProductForm: React.FC = () => {
         style={{ maxWidth: '1536px', margin: '10px auto 0' }}
       >
         <Formik
-          initialValues={initValues}
+          initialValues={initProduct}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
@@ -95,7 +122,6 @@ const ProductForm: React.FC = () => {
                 </Grid>
 
                 <Grid item xs={12}>
-
                   <Button
                     type="submit"
                     disabled={isSubmitting}
@@ -105,11 +131,9 @@ const ProductForm: React.FC = () => {
                   </Button>
                 </Grid>
               </Grid>
-
             </Form>
           )}
         </Formik>
-
       </Grid>
     }
     </>

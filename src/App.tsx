@@ -8,19 +8,7 @@ import ProductForm from './components/product/productForm';
 
 function App() {
 
-  // const [products, setProducts] = useState<Array<repo.Product>>([])
 
-  // useEffect(() => {
-  //   fetchProducts()
-  // }, [])
-
-  // const fetchProducts = async () => {
-  //   setProducts([])
-  //   const _products = await repo.all()
-  //   setProducts(_products)
-  //   console.log('products', _products);
-
-  // }
 
   return (
     <Fragment>
@@ -28,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/product' element={<ProductForm />} />
+        <Route path="/product/:id" element={<ProductForm />} />
       </Routes>
     </Fragment>
   )

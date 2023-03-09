@@ -1,0 +1,2 @@
+export const SET_CATEGORY_ID = 'SET_CATEGORY_ID'
+export const SET_CATELOG_NAME = 'SET_CATELOG_NAME'
