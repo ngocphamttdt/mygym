@@ -2,7 +2,8 @@ import { IProduct } from './../../components/models/productInterface'
 import {
   ADD_PRODUCT,
   SET_PRODUCTS,
-  UPDATE_PRODUCT
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT
 } from '../constants/productConstants'
 
 interface SetProducts {
@@ -20,4 +21,13 @@ interface addProduct {
   payload: IProduct
 }
 
-export type ProductActions = SetProducts | updateProduct | addProduct
+interface deleteProduct {
+  type: typeof DELETE_PRODUCT
+  payload: string
+}
+
+export type ProductActions =
+  | SetProducts
+  | updateProduct
+  | addProduct
+  | deleteProduct

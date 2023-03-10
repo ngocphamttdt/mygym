@@ -10,7 +10,7 @@ import * as categoryRepo from '../../db/repositories/category'
 import { IProduct } from '../models/productInterface';
 import { ICategory } from '../models/categoryInterface';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ADD_PRODUCT, UPDATE_PRODUCT } from '../../store/constants/productConstants';
 
 
@@ -32,6 +32,7 @@ const initValues: IProduct = {
 const ProductForm: React.FC = () => {
   const params: any = useParams()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [categoryOptions, setCategoryOptions] = useState<IObject[]>()
   const categorySelector: IObject[] = useSelector((state: any) => state.category.data)
@@ -49,6 +50,7 @@ const ProductForm: React.FC = () => {
       const newProduct: IProduct = await repo.create(values)
       dispatch({ type: ADD_PRODUCT, payload: newProduct })
     }
+    navigate('/')
   }
 
   const fetchCategory = async () => {

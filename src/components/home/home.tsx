@@ -9,15 +9,17 @@ import { IProduct } from "../models/productInterface";
 import ProductCard from "../product/productCard";
 import * as categoryRepo from '../../db/repositories/category'
 import { SET_CATEGORY_ID } from "../../store/constants/categoryConstants";
-import { SET_PRODUCTS } from "../../store/constants/productConstants";
+import { DELETE_PRODUCT, SET_PRODUCTS } from "../../store/constants/productConstants";
 import SearchingBox from "./searchBox";
 import { Box } from "@mui/system";
+import Loading from "../common/loading";
 
 const Home: React.FC = () => {
   const dispath = useDispatch()
   const [products, setProducts] = useState<Array<IProduct>>([])
   const [categoryOptions, setCategoryOptions] = useState<IObject[]>([])
   const [isFilter, setIsFilter] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   const categorySelector: IObject[] = useSelector((state: any) => state.category.data)
   const productSelector: IProduct[] = useSelector((state: any) => state.products.data)
@@ -55,6 +57,7 @@ const Home: React.FC = () => {
     setProducts([])
     const _products = await repo.all()
     setProducts(_products)
+    setIsLoading(false)
   }
 
   const handleSearchProduct = (searchData: IProduct) => {
@@ -77,43 +80,55 @@ const Home: React.FC = () => {
     setIsFilter(false)
   }
 
+  const handleDelete = async (prodId: string) => {
+    await repo.remove(prodId)
+    fetchProducts()
+    dispath({ type: DELETE_PRODUCT, payload: prodId })
+  }
+
   return (
     <>
-      <Grid
-        container
-        spacing={{ xs: 1, md: 1 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        style={{ maxWidth: '1536px', margin: '10px auto 0' }}
-      >
-        <Grid item xs={3}>
-          <Box display="flex" justifyContent="flex-start" gap={2}>
-            <SearchingBox onSearchProduct={handleSearchProduct} />
-            {isFilter && <Button variant="outlined" onClick={handleReset}>Reset</Button>}
-          </Box>
-        </Grid>
-
-      </Grid>
-
-      <Grid
-        container
-        rowSpacing={2}
-        spacing={{ xs: 1, md: 1 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        style={{ maxWidth: '1536px', margin: '10px auto 0' }}
-      >
-        {
-          products && products.map(({ id, code, name, price }) => (
-            <Grid item xs={3} key={id}>
-              <ProductCard
-                id={id}
-                code={code}
-                name={name}
-                price={price}
-              />
+      {isLoading ? <Loading /> :
+        <>
+          <Grid
+            container
+            spacing={{ xs: 1, md: 1 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            style={{ maxWidth: '1536px', margin: '10px auto 0' }}
+          >
+            <Grid item xs={3}>
+              <Box display="flex" justifyContent="flex-start" gap={2}>
+                <SearchingBox onSearchProduct={handleSearchProduct} />
+                {isFilter && <Button variant="outlined" onClick={handleReset}>Reset</Button>}
+              </Box>
             </Grid>
-          ))
-        }
-      </Grid>
+
+          </Grid>
+
+          <Grid
+            container
+            rowSpacing={2}
+            spacing={{ xs: 1, md: 1 }}
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            style={{ maxWidth: '1536px', margin: '10px auto 0' }}
+          >
+            {
+              products && products.map(({ id, code, name, price }) => (
+                <Grid item xs={3} key={id}>
+                  <ProductCard
+                    id={id}
+                    code={code}
+                    name={name}
+                    price={price}
+                    onDelete={handleDelete}
+
+                  />
+                </Grid>
+              ))
+            }
+          </Grid>
+        </>
+      }
     </>
   )
 }

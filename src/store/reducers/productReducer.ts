@@ -1,6 +1,7 @@
 import { IProduct } from '../../components/models/productInterface'
 import {
   ADD_PRODUCT,
+  DELETE_PRODUCT,
   SET_PRODUCTS,
   UPDATE_PRODUCT
 } from '../constants/productConstants'
@@ -28,6 +29,11 @@ export const productReducer = (
       return {
         ...state,
         data: [...state.data, action.payload]
+      }
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        data: [...state.data.filter((x) => x.id !== action.payload)]
       }
 
     default:

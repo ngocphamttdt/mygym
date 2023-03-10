@@ -6,7 +6,7 @@ import { useDropzone, Accept } from 'react-dropzone';
 const UploadPhoto: React.FC = () => {
 
 
-  return <></>
+  return <>IloveU</>
 }
 
 export default UploadPhoto
