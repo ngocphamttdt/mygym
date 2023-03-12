@@ -6,8 +6,11 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, IconButton, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { useLocalStorage } from '../../hooks';
+import { IShoppingItem } from '../models/shoppingCartInterface';
 
-type productProps = {
+interface productProps {
   id?: string
   code: number,
   name: string,
@@ -15,10 +18,25 @@ type productProps = {
   onDelete: (param: string) => void
 }
 
-const ProductCard: React.FC<productProps> = ({ id, code, name, price, onDelete }) => {
+const ProductCard = ({ id, code, name, price, onDelete }: productProps) => {
+
+  const [storageValue, setStorageValue] = useLocalStorage<IShoppingItem[]>('shopping-cart', [])
 
   const handleDelete = () => onDelete(id as string)
+  const handleAddToCart = () => {
+    const newItem = { id: id, productName: name, price: price, count: 1 } as IShoppingItem
+    if (storageValue.length === 0)
+      storageValue.push(newItem)
 
+    else {
+      storageValue.forEach(item => {
+        if (item.id === id) item.count++
+        else
+          storageValue.push(newItem)
+      })
+    }
+    setStorageValue([...storageValue])
+  }
 
   return (
     <>
@@ -45,6 +63,9 @@ const ProductCard: React.FC<productProps> = ({ id, code, name, price, onDelete }
           <Button size="small" color="primary">
             ${price}
           </Button>
+          <IconButton size="small" color="primary" onClick={handleAddToCart}>
+            <AddShoppingCartIcon />
+          </IconButton>
           <Tooltip title="Delete" style={{ marginLeft: 'auto' }}>
             <IconButton onClick={handleDelete}>
               <DeleteIcon />

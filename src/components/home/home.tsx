@@ -14,7 +14,8 @@ import SearchingBox from "./searchBox";
 import { Box } from "@mui/system";
 import Loading from "../common/loading";
 
-const Home: React.FC = () => {
+
+const Home = () => {
   const dispath = useDispatch()
   const [products, setProducts] = useState<Array<IProduct>>([])
   const [categoryOptions, setCategoryOptions] = useState<IObject[]>([])

@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import { useNavigate } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 const pages = ['Home', 'Product', 'Blog'];
@@ -135,7 +136,16 @@ const Navbar: React.FC = () => {
             ))}
 
           </Box>
-
+          <Box sx={{ width: 1 / 4, display: { md: 'flex' } }}>
+            <Button
+              key={4}
+              sx={{ width: '100%', color: 'white', display: 'block' }}
+              startIcon={<ShoppingCartIcon />}
+            >
+              {'Shopping Cart'}
+            </Button>
+          </Box>
+          {/* 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -164,7 +174,7 @@ const Navbar: React.FC = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
