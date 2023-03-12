@@ -11,7 +11,7 @@ import { IProduct } from '../models/productInterface';
 import { useSelector } from 'react-redux';
 import { IObject, ISearchingParams } from '../models/interfaceModels';
 
-const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
+export const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
   const [open, setOpen] = useState<boolean>(false);
   const [productPrice, setProductPrice] = useState<number | number[]>()
   const [selectedCategory, setSelectedCategory] = useState<string>('')
@@ -107,4 +107,3 @@ const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
   );
 }
 
-export default SearchingBox

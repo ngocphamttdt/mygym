@@ -10,12 +10,12 @@ import ProductCard from "../product/productCard";
 import * as categoryRepo from '../../db/repositories/category'
 import { SET_CATEGORY_ID } from "../../store/constants/categoryConstants";
 import { DELETE_PRODUCT, SET_PRODUCTS } from "../../store/constants/productConstants";
-import SearchingBox from "./searchBox";
 import { Box } from "@mui/system";
 import Loading from "../common/loading";
+import { SearchingBox } from "./searchBox";
 
 
-const Home = () => {
+export const Home = () => {
   const dispath = useDispatch()
   const [products, setProducts] = useState<Array<IProduct>>([])
   const [categoryOptions, setCategoryOptions] = useState<IObject[]>([])
@@ -133,5 +133,3 @@ const Home = () => {
     </>
   )
 }
-
-export default Home
