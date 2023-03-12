@@ -20,7 +20,7 @@ const pages = ['Home', 'Product', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

@@ -1,6 +1,6 @@
 import { Button, Grid, } from '@mui/material';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
 import SelectWrapper from '../customControl/select';
 import TextfieldWrapper from '../customControl/textField';
@@ -29,7 +29,7 @@ const initValues: IProduct = {
   url: ''
 };
 
-const ProductForm: React.FC = () => {
+const ProductForm = () => {
   const params: any = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()

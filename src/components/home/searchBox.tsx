@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,7 +11,7 @@ import { IProduct } from '../models/productInterface';
 import { useSelector } from 'react-redux';
 import { IObject, ISearchingParams } from '../models/interfaceModels';
 
-const SearchingBox: React.FC<ISearchingParams> = ({ onSearchProduct }) => {
+const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
   const [open, setOpen] = useState<boolean>(false);
   const [productPrice, setProductPrice] = useState<number | number[]>()
   const [selectedCategory, setSelectedCategory] = useState<string>('')
