@@ -4,10 +4,10 @@ import { Fragment } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
-import PageNotFound from 'components/common/notFound';
 import { Home } from 'components/home';
 import Navbar from 'components/navbar/navbar';
 import { ProductForm, UploadPhoto } from 'components/product';
+import { PageNotFound } from 'components/common';
 function App() {
   return (
     <Fragment>

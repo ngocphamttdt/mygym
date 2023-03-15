@@ -1,10 +1,9 @@
 import { Button, Typography } from '@mui/material';
 import { blue } from '@mui/material/colors';
-import { Box } from '@mui/system';
-import React from 'react'
+import { Box } from '@mui/system'
 import { useNavigate } from 'react-router-dom';
 
-const PageNotFound: React.FC = () => {
+export const PageNotFound = () => {
   const color = blue[300];
   const navigate = useNavigate();
   return (
@@ -29,5 +28,3 @@ const PageNotFound: React.FC = () => {
     </Box>
   );
 }
-
-export default PageNotFound

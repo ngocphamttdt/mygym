@@ -6,6 +6,7 @@ import { shortItem } from "utils/common";
 import { IShoppingItem, IShoppingTotal } from "../models/shoppingCartInterface";
 import { ShoppingCartDetail } from "./shoppingCartDetail";
 import { ShoppingCartTotal } from "./shoppingCartTotal";
+import { Widget } from "components/common";
 
 const INCREMENTED_COUNT: string = 'INCREMENTED_COUNT'
 const DECREMENTE_COUNT: string = 'DECREMENTE_COUNT'
@@ -70,6 +71,7 @@ export const ShoppingCart = () => {
 
       return accumulator
     }, { numOfItem: 0, total: 0 } as IShoppingTotal)
+
     return info
   }, [state])
 
@@ -103,7 +105,9 @@ export const ShoppingCart = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={12}>Address: {address}</Grid>
+        <Grid item xs={8}>
+          <Widget title="Address:">{address}</Widget>
+        </Grid>
         <Grid item xs={8}>
           <ShoppingCartDetail
             shoppingItems={state.data}

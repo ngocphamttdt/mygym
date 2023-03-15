@@ -10,9 +10,9 @@ import * as categoryRepo from 'db/repositories/category'
 import { SET_CATEGORY_ID } from "store/constants/categoryConstants";
 import { DELETE_PRODUCT, SET_PRODUCTS } from 'store/constants/productConstants'
 import { Box } from "@mui/system";
-import Loading from "../common/loading";
 import { SearchingBox } from "./searchBox";
 import { ProductCard } from "../product";
+import { Loading } from "components/common";
 
 
 export const Home = () => {

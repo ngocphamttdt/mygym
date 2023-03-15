@@ -2,7 +2,7 @@ import { CircularProgress, Grid } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 
-const Loading: React.FC = () => {
+export const Loading: React.FC = () => {
 
   return (
     <>
@@ -23,5 +23,3 @@ const Loading: React.FC = () => {
     </>
   )
 }
-
-export default Loading

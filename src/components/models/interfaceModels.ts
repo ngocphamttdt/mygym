@@ -1,3 +1,4 @@
+import { ReactChild } from 'react'
 import { IProduct } from './productInterface'
 export interface FormValues {
   name: string
@@ -22,4 +23,9 @@ export interface ISelectionFieldProps {
 
 export interface ISearchingParams {
   onSearchProduct: (parms: IProduct) => void
+}
+
+export interface IWidgetProps {
+  title: string
+  children: ReactChild
 }

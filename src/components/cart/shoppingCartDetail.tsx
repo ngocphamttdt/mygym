@@ -1,6 +1,6 @@
 
-import React from "react";
-import { Button, ButtonGroup, Grid, IconButton } from "@mui/material"
+import React, { Fragment } from "react";
+import { Button, ButtonGroup, Grid, IconButton, Paper } from "@mui/material"
 import { IShoppingDetailProps } from "components/models/shoppingCartInterface"
 import { BodyCart, HeadingCart, Item } from "./cart.module"
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,7 +11,7 @@ export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, on
   const handleDelete = (id: string) => onDelete(id)
 
   return (
-    <Item>
+    <Paper elevation={3} sx={{ p: 2 }}>
       <h3>Product item(s)</h3>
       <HeadingCart>
         <Grid container>
@@ -38,8 +38,8 @@ export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, on
       <BodyCart>
         <Grid container rowSpacing={2}>
           {shoppingItems && shoppingItems.map(({ id, productName, price, count }, indx) => (
-            <>
-              <Grid item xs={1} key={id}>
+            <Fragment key={id}>
+              <Grid item xs={1} >
                 {indx + 1}
               </Grid>
               <Grid item xs={3}>
@@ -64,11 +64,11 @@ export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, on
                   <DeleteIcon />
                 </IconButton>
               </Grid>
-            </>
+            </Fragment>
           )
           )}
         </Grid>
       </BodyCart>
-    </Item>
+    </Paper>
   )
 })
