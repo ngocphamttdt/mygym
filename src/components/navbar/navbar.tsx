@@ -44,6 +44,8 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+  const gotoShoppingCart = () => navigate('product/shopping')
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -141,6 +143,7 @@ const Navbar = () => {
               key={4}
               sx={{ width: '100%', color: 'white', display: 'block' }}
               startIcon={<ShoppingCartIcon />}
+              onClick={gotoShoppingCart}
             >
               {'Shopping Cart'}
             </Button>

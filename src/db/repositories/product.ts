@@ -1,4 +1,4 @@
-import { IProduct } from '../../components/models/productInterface'
+import { IProduct } from 'components/models/productInterface'
 import { _all, _create, _remove, _update } from './repos'
 
 const COLLECTION_NAME = 'product'

@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions, IconButton, Tooltip } from '@mui/m
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { useLocalStorage } from '../../hooks';
+import { useLocalStorage } from 'hooks';
 import { IShoppingItem } from '../models/shoppingCartInterface';
 
 interface productProps {
@@ -18,7 +18,7 @@ interface productProps {
   onDelete: (param: string) => void
 }
 
-const ProductCard = ({ id, code, name, price, onDelete }: productProps) => {
+export const ProductCard = ({ id, code, name, price, onDelete }: productProps) => {
 
   const [storageValue, setStorageValue] = useLocalStorage<IShoppingItem[]>('shopping-cart', [])
 
@@ -76,5 +76,3 @@ const ProductCard = ({ id, code, name, price, onDelete }: productProps) => {
     </>
   )
 }
-
-export default React.memo(ProductCard)

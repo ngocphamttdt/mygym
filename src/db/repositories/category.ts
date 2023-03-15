@@ -1,4 +1,4 @@
-import { ICategory } from '../../components/models/categoryInterface'
+import { ICategory } from 'components/models/categoryInterface'
 import { _all } from './repos'
 
 const COLLECTION_NAME = 'category'

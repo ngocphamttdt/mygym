@@ -2,16 +2,16 @@ import { Button, Grid, } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react'
 import * as Yup from 'yup'
-import SelectWrapper from '../customControl/select';
-import TextfieldWrapper from '../customControl/textField';
+import SelectWrapper from 'components/customControl/select'
+import TextfieldWrapper from 'components/customControl/textField';
 import { IObject } from '../models/interfaceModels';
-import * as repo from '../../db/repositories/product'
-import * as categoryRepo from '../../db/repositories/category'
+import * as repo from 'db/repositories/product'
+import * as categoryRepo from 'db/repositories/category'
 import { IProduct } from '../models/productInterface';
 import { ICategory } from '../models/categoryInterface';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ADD_PRODUCT, UPDATE_PRODUCT } from '../../store/constants/productConstants';
+import { ADD_PRODUCT, UPDATE_PRODUCT } from 'store/constants/productConstants';
 
 
 const validationSchema = Yup.object().shape({
@@ -29,7 +29,7 @@ const initValues: IProduct = {
   url: ''
 };
 
-const ProductForm = () => {
+export const ProductForm = () => {
   const params: any = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -141,5 +141,3 @@ const ProductForm = () => {
     </>
   )
 }
-
-export default ProductForm

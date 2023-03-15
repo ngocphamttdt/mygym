@@ -1,5 +1,5 @@
-import { IObject } from './../../components/models/interfaceModels'
-import { CategoryActions } from './../actions/categoryActions'
+import { IObject } from 'components/models/interfaceModels'
+import { CategoryActions } from '../actions/categoryActions'
 import {
   SET_CATEGORY_ID,
   SET_CATELOG_NAME

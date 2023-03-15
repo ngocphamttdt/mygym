@@ -1,6 +1,6 @@
 import { FormControl, FormHelperText, Input, InputLabel } from "@mui/material";
 import React, { useEffect } from "react";
-import * as repo from '../../db/repositories/product'
+import * as repo from 'db/repositories/product'
 import { IProduct } from "../models/productInterface";
 
 const ex: IProduct = {
@@ -13,7 +13,7 @@ const upEx: IProduct = {
   name: 'skirt num1',
   price: 20,
 }
-const Product: React.FC = () => {
+export const Product = () => {
 
   useEffect(() => {
     //  createProduct(ex)
@@ -50,5 +50,3 @@ const Product: React.FC = () => {
   )
 
 }
-
-export default Product

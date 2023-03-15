@@ -54,7 +54,6 @@ export const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
           {"Search Products"}
         </DialogTitle>
         <DialogContent>
-
           <DialogContentText id="alert-dialog-description">
             <Grid
               container

@@ -1,18 +1,18 @@
 import { Button, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as repo from '../../db/repositories/product'
-import { ICategory } from "../models/categoryInterface";
-import { IObject } from "../models/interfaceModels";
-import { IProduct } from "../models/productInterface";
+import * as repo from 'db/repositories/product'
+import { ICategory } from 'components/models/categoryInterface'
+import { IObject } from 'components/models/interfaceModels'
+import { IProduct } from "components/models/productInterface";
 
-import ProductCard from "../product/productCard";
-import * as categoryRepo from '../../db/repositories/category'
-import { SET_CATEGORY_ID } from "../../store/constants/categoryConstants";
-import { DELETE_PRODUCT, SET_PRODUCTS } from "../../store/constants/productConstants";
+import * as categoryRepo from 'db/repositories/category'
+import { SET_CATEGORY_ID } from "store/constants/categoryConstants";
+import { DELETE_PRODUCT, SET_PRODUCTS } from 'store/constants/productConstants'
 import { Box } from "@mui/system";
 import Loading from "../common/loading";
 import { SearchingBox } from "./searchBox";
+import { ProductCard } from "../product";
 
 
 export const Home = () => {

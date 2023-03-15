@@ -1,4 +1,4 @@
-import { IProduct } from '../../components/models/productInterface'
+import { IProduct } from 'components/models/productInterface'
 import {
   ADD_PRODUCT,
   DELETE_PRODUCT,

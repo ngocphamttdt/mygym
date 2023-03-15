@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material';
-import { blue, purple } from '@mui/material/colors';
-import { Box, Container } from '@mui/system';
+import { blue } from '@mui/material/colors';
+import { Box } from '@mui/system';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
