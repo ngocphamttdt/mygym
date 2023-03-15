@@ -4,8 +4,6 @@ import React from "react";
 import { Item } from "./cart.module";
 
 export const ShoppingCartTotal = React.memo(({ total, numOfItem }: IShoppingTotal) => {
-  console.log('render ShoppingCartTotal');
-
   return (
     <Item>
       <h3>Shopping Info</h3>

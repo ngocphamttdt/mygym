@@ -6,9 +6,9 @@ import { BodyCart, HeadingCart, Item } from "./cart.module"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, onDelete }: IShoppingDetailProps) => {
+
   const handleChangeCount = (increase: boolean, id: string) => onChangeCount(increase, id)
   const handleDelete = (id: string) => onDelete(id)
-  console.log('render ShoppingCartDetail');
 
   return (
     <Item>
