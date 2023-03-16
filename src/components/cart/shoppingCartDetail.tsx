@@ -1,14 +1,20 @@
 
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Button, ButtonGroup, Grid, IconButton, Paper } from "@mui/material"
 import { IShoppingDetailProps } from "components/models/shoppingCartInterface"
 import { BodyCart, HeadingCart } from "./cart.module"
 import DeleteIcon from '@mui/icons-material/Delete';
+import { DialogBox } from "components/common";
 
 export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, onDelete }: IShoppingDetailProps) => {
-
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const handleChangeCount = (increase: boolean, id: string) => onChangeCount(increase, id)
-  const handleDelete = (id: string) => onDelete(id)
+  const handleDelete = (id: string) => {
+    onDelete(id)
+    setIsOpen(false)
+  }
+
+  const handleConfirmDelete = () => setIsOpen(true)
 
   return (
     <Paper elevation={3} sx={{ p: 2 }}>
@@ -60,13 +66,23 @@ export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, on
                 {price * count}
               </Grid>
               <Grid item xs={1}>
-                <IconButton onClick={() => handleDelete(id)}>
+                <IconButton onClick={handleConfirmDelete}>
                   <DeleteIcon />
                 </IconButton>
               </Grid>
+              <Grid>
+                <DialogBox
+                  title="sdfsdkjlf"
+                  isOpen={isOpen}
+                  onClose={() => setIsOpen(false)}
+                  onSuccess={() => handleDelete(id)}
+                >
+                  <p>Do you want to delete this cart item?</p>
+                </DialogBox></Grid>
             </Fragment>
           )
           )}
+
         </Grid>
       </BodyCart>
     </Paper>

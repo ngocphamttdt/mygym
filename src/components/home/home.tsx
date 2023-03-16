@@ -22,6 +22,7 @@ export const Home = () => {
   const [isFilter, setIsFilter] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
+
   const categorySelector: IObject[] = useSelector((state: any) => state.category.data)
   const productSelector: IProduct[] = useSelector((state: any) => state.products.data)
 
@@ -103,9 +104,7 @@ export const Home = () => {
                 {isFilter && <Button variant="outlined" onClick={handleReset}>Reset</Button>}
               </Box>
             </Grid>
-
           </Grid>
-
           <Grid
             container
             rowSpacing={2}
