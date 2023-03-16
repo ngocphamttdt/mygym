@@ -29,7 +29,6 @@ export const DialogBox = ({ children, isOpen, onClose, onSuccess, title }: IDial
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {children}
-
           </DialogContentText>
         </DialogContent>
         <DialogActions>
