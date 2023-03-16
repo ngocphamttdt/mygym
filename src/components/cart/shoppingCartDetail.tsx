@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 import { Button, ButtonGroup, Grid, IconButton, Paper } from "@mui/material"
 import { IShoppingDetailProps } from "components/models/shoppingCartInterface"
-import { BodyCart, HeadingCart, Item } from "./cart.module"
+import { BodyCart, HeadingCart } from "./cart.module"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, onDelete }: IShoppingDetailProps) => {

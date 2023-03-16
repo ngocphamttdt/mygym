@@ -1,7 +1,6 @@
 import { Box, Button, Paper } from "@mui/material";
 import { IShoppingTotal } from "components/models/shoppingCartInterface";
 import React from "react";
-import { Item } from "./cart.module";
 
 export const ShoppingCartTotal = React.memo(({ total, numOfItem }: IShoppingTotal) => {
   return (
