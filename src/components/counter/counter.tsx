@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export interface CounterProps {
   description: string;
@@ -8,6 +8,19 @@ export interface CounterProps {
 export function Counter({ description, defaultCount }: CounterProps) {
   const [count, setCount] = useState(defaultCount);
   const [incrementor, setIncrementor] = useState(1);
+  const [bigEnough, setBigEnough] = useState(defaultCount >= 15)
+
+  useEffect(() => {
+    let id: NodeJS.Timeout
+    if (count >= 15) {
+      setTimeout(() => {
+        setBigEnough(true)
+      }, 300);
+    }
+    return function cleanup() {
+      clearTimeout(id)
+    }
+  })
 
   return (
     <div>
@@ -27,7 +40,9 @@ export function Counter({ description, defaultCount }: CounterProps) {
       <button
         data-testid="minus"
         aria-label="Subtract from Counter"
-        onClick={() => setCount(count - incrementor)}
+        onClick={() => setTimeout(() => {
+          setCount(count - incrementor)
+        }, 200)}
       >
         -
       </button>
@@ -39,7 +54,7 @@ export function Counter({ description, defaultCount }: CounterProps) {
       >
         +
       </button>
-      <button>ngoc</button>
+      {bigEnough ? null : <div>I am too small</div>}
     </div>
   );
 }

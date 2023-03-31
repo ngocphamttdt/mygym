@@ -6,3 +6,5 @@ export const shortItem = (data: IShoppingItem[]): IShoppingItem[] =>
     if (a.productName > b.productName) return 1
     return 0
   })
+
+export const sum = (num1: number, num2: number): number => num1 + num2
