@@ -78,7 +78,8 @@ export const ShoppingCartDetail = React.memo(({ shoppingItems, onChangeCount, on
                   onSuccess={() => handleDelete(id)}
                 >
                   <p>Do you want to delete this cart item?</p>
-                </DialogBox></Grid>
+                </DialogBox>
+              </Grid>
             </Fragment>
           )
           )}

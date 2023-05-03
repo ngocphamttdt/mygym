@@ -61,9 +61,10 @@ export const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
               rowSpacing={3}
               columns={{ md: 12 }}
               style={{ marginTop: '10px' }}>
-              <Grid item xs={12}><FormControl fullWidth>
-                <TextField id="outlined-basic" label="Product Name" variant="outlined" inputRef={nameRef} />
-              </FormControl>
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <TextField id="outlined-basic" label="Product Name" variant="outlined" inputRef={nameRef} />
+                </FormControl>
               </Grid>
 
               <Grid item xs={12}>

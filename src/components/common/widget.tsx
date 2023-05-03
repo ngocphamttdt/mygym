@@ -1,6 +1,5 @@
 import { Paper, Typography } from '@mui/material'
 import { IWidgetProps } from 'components/models/interfaceModels'
-import React, { ReactChild } from 'react'
 
 export const Widget = ({ title, children }: IWidgetProps) => {
   return (
