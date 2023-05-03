@@ -80,7 +80,6 @@ export const BarChart = () => {
         <Bar
           options={chartData['option']}
           data={chartData['data']}
-
         />
       }
     </>)

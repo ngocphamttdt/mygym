@@ -3,7 +3,7 @@ import { IPhoto } from "components/models/photo"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 
-const Container = styled.div`
+const Container: any = styled.div`
   max-width: 1536px;
   margin: 10px auto;
   display: flex;
@@ -12,7 +12,7 @@ const Container = styled.div`
   padding-top: 8px ;
   
 `
-const BtnSection = styled.div`
+const BtnSection: any = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 8px;
@@ -20,7 +20,7 @@ const BtnSection = styled.div`
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;  
 `
 
-const ContentSection = styled.div`
+const ContentSection: any = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -28,7 +28,7 @@ const ContentSection = styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
 `
-const Item = styled.div`
+const Item: any = styled.div`
   width: 28%;
   height: 150px;
   margin: 12px 0;
