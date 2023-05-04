@@ -6,9 +6,12 @@ import * as repo from 'db/repositories/product'
 import { Bar } from "react-chartjs-2"
 import { Chart, registerables } from "chart.js"
 import { IValueMap } from "components/models/valueMapInterface"
+import { EFields } from "components/models/fieldsEnum"
 
 
 Chart.register(...registerables);
+
+
 
 export const BarChart = () => {
   const productSelectors: IProduct[] = useSelector((state: any) => state.products.data)
@@ -20,13 +23,13 @@ export const BarChart = () => {
     if (products) {
       const data: any = products.reduce((acc: IValueMap, curr: IProduct) => {
         if (curr.price < 5)
-          acc['less'] = acc['less'] ? acc['less'] + 1 : 1
+          acc[EFields.LESS] = acc[EFields.LESS] ? acc[EFields.LESS] + 1 : 1
 
         else if (curr.price >= 5 && curr.price <= 10)
-          acc['middle'] = acc['middle'] ? acc['middle'] + 1 : 1
+          acc[EFields.MIDDLE] = acc[EFields.MIDDLE] ? acc[EFields.MIDDLE] + 1 : 1
 
         else if (curr.price > 10)
-          acc['greater'] = acc['greater'] ? acc['greater'] + 1 : 1
+          acc[EFields.GREATER] = acc[EFields.GREATER] ? acc[EFields.GREATER] + 1 : 1
 
         return acc
       }, {} as IValueMap)

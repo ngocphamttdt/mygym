@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import * as repo from 'db/repositories/product'
 import { ProductActions } from "store/actions/productActions";
 import { Pie } from "react-chartjs-2";
+import { EFields } from "components/models/fieldsEnum";
 
 Chart.register(...registerables);
 
@@ -19,13 +20,13 @@ export const PieChart = () => {
     if (products) {
       const data: any = products.reduce((acc: IValueMap, curr: IProduct) => {
         if (curr.price < 5)
-          acc['less'] = acc['less'] ? acc['less'] + 1 : 1
+          acc[EFields.LESS] = acc[EFields.LESS] ? acc[EFields.LESS] + 1 : 1
 
         else if (curr.price >= 5 && curr.price <= 10)
-          acc['middle'] = acc['middle'] ? acc['middle'] + 1 : 1
+          acc[EFields.MIDDLE] = acc[EFields.MIDDLE] ? acc[EFields.MIDDLE] + 1 : 1
 
         else if (curr.price > 10)
-          acc['greater'] = acc['greater'] ? acc['greater'] + 1 : 1
+          acc[EFields.GREATER] = acc[EFields.GREATER] ? acc[EFields.GREATER] + 1 : 1
 
         return acc
       }, {} as IValueMap)
