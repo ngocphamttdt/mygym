@@ -23,7 +23,7 @@ interface addProduct {
 
 interface deleteProduct {
   type: typeof DELETE_PRODUCT
-  payload: string
+  payload: number
 }
 
 export type ProductActions =

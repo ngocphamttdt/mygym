@@ -5,14 +5,11 @@ import * as Yup from 'yup'
 import SelectWrapper from 'components/customControl/select'
 import TextfieldWrapper from 'components/customControl/textField';
 import { IObject } from '../models/interfaceModels';
-import * as repo from 'db/repositories/product'
-import * as categoryRepo from 'db/repositories/category'
 import { IProduct } from '../models/productInterface';
-import { ICategory } from '../models/categoryInterface';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ADD_PRODUCT, UPDATE_PRODUCT } from 'store/constants/productConstants';
-
+import { get, post, put } from 'api/apiHelper';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -22,8 +19,7 @@ const validationSchema = Yup.object().shape({
 });
 const initValues: IProduct = {
   name: '',
-  code: 100,
-  categoryId: '',
+  categoryId: 0,
   desc: '',
   price: 0,
   url: ''
@@ -41,38 +37,44 @@ export const ProductForm = () => {
   const [initProduct, setInitProduct] = useState<IProduct>(initValues)
 
   const handleSubmit = async (values: IProduct) => {
-    if (Object.keys(params).length) {
-      await repo.update(params.id, values)
-      dispatch({ type: UPDATE_PRODUCT, payload: { ...values, id: params.id } as IProduct })
+    const newProduct: IProduct = {
+      name: values.name,
+      price: +values.price,
+      categoryId: values.categoryId
+    }
 
+    if (Object.keys(params).length) {
+      const updatedProduct = {
+        ...newProduct,
+        id: +params.id
+      } as IProduct
+
+      await put('https://localhost:7137/api/product', updatedProduct)
+
+      dispatch({ type: UPDATE_PRODUCT, payload: updatedProduct })
     }
     else {
-      const newProduct: IProduct = await repo.create(values)
+      await post('https://localhost:7137/api/product', newProduct)
       dispatch({ type: ADD_PRODUCT, payload: newProduct })
     }
     navigate('/')
   }
 
   const fetchCategory = async () => {
-    const _categories: ICategory[] = await categoryRepo.all()
-
-    const newCategoryOptions: IObject[] = _categories.map((item) => {
-      return {
-        value: `category/${item.id}`,
-        label: item.name
-      } as IObject
-    })
-
+    const data = await get('https://localhost:7137/api/category')
+    const newCategoryOptions: IObject[] = data.map((item: any) => ({ value: item.id, label: item.name }))
     setCategoryOptions(newCategoryOptions)
   }
 
   useEffect(() => {
     if (!categorySelector)
       fetchCategory()
-    else setCategoryOptions(categorySelector)
+    else {
+      setCategoryOptions(categorySelector)
+    }
 
     if (Object.keys(params).length && productSelector) {
-      const selectedProduct = productSelector.find(x => x.id === params.id) as IProduct
+      const selectedProduct = productSelector.find(x => x.id === +params.id) as IProduct
       setInitProduct(selectedProduct)
     }
   }, [])

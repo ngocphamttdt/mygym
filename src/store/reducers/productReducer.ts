@@ -11,6 +11,8 @@ export const productReducer = (
   state: { data: IProduct[] },
   action: ProductActions
 ) => {
+  console.log('prodState', state);
+
   switch (action.type) {
     case SET_PRODUCTS:
       return {

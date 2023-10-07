@@ -1,18 +1,18 @@
 import { Button, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as repo from 'db/repositories/product'
+
 import { ICategory } from 'components/models/categoryInterface'
 import { IObject } from 'components/models/interfaceModels'
 import { IProduct } from "components/models/productInterface";
 
-import * as categoryRepo from 'db/repositories/category'
 import { SET_CATEGORY_ID } from "store/constants/categoryConstants";
 import { DELETE_PRODUCT, SET_PRODUCTS } from 'store/constants/productConstants'
 import { Box } from "@mui/system";
 import { SearchingBox } from "./searchBox";
 import { ProductCard } from "../product";
 import { Loading } from "components/common";
+import { get, remove } from "api/apiHelper";
 
 
 export const Home = () => {
@@ -44,21 +44,14 @@ export const Home = () => {
   }, [products])
 
   const fetchCategory = async () => {
-    const _categories: ICategory[] = await categoryRepo.all()
-    const newCategoryOptions: IObject[] = _categories.map((item) => {
-      return {
-        value: `category/${item.id}`,
-        label: item.name
-      } as IObject
-    })
-
-    setCategoryOptions(() => newCategoryOptions)
+    const data = await get('https://localhost:7137/api/category')
+    setCategoryOptions(data.map((item: ICategory) => ({ value: item.id, label: item.name } as IObject)))
   }
 
   const fetchProducts = async () => {
     setProducts([])
-    const _products = await repo.all()
-    setProducts(_products)
+    const data = await get('https://localhost:7137/api/product')
+    setProducts(data as IProduct[])
     setIsLoading(false)
   }
 
@@ -82,8 +75,8 @@ export const Home = () => {
     setIsFilter(false)
   }
 
-  const handleDelete = async (prodId: string) => {
-    await repo.remove(prodId)
+  const handleDelete = async (prodId: number) => {
+    await remove(`https://localhost:7137/api/product/${prodId}`)
     fetchProducts()
     dispath({ type: DELETE_PRODUCT, payload: prodId })
   }
@@ -113,11 +106,10 @@ export const Home = () => {
             style={{ maxWidth: '1536px', margin: '10px auto 0' }}
           >
             {
-              products && products.map(({ id, code, name, price }) => (
+              products && products.map(({ id, name, price }) => (
                 <Grid item xs={3} key={id}>
                   <ProductCard
                     id={id}
-                    code={code}
                     name={name}
                     price={price}
                     onDelete={handleDelete}

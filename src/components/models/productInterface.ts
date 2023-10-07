@@ -6,12 +6,11 @@ export interface IProductForm {
   url: string
 }
 
-export type IProduct = {
-  id?: string
-  code: number
+export interface IProduct  {
+  id?: number
   name: string
   price: number
   desc?: string
-  categoryId?: string
+  categoryId?: number
   url?: string
 }

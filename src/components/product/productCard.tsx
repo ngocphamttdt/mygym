@@ -12,14 +12,13 @@ import { IShoppingItem } from '../models/shoppingCartInterface';
 import { DialogBox } from 'components/common';
 
 interface productProps {
-  id?: string
-  code: number,
+  id?: number
   name: string,
   price: number,
-  onDelete: (param: string) => void
+  onDelete: (param: number) => void
 }
 
-export const ProductCard = ({ id, code, name, price, onDelete }: productProps) => {
+export const ProductCard = ({ id, name, price, onDelete }: productProps) => {
 
   const [storageValue, setStorageValue] = useLocalStorage<IShoppingItem[]>('shopping-cart', [])
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -27,7 +26,7 @@ export const ProductCard = ({ id, code, name, price, onDelete }: productProps) =
   const handleConfirmDelete = () => setIsOpen(true)
 
   const handleDelete = () => {
-    onDelete(id as string)
+    onDelete(id as number)
     setIsOpen(false)
   }
 
@@ -60,7 +59,7 @@ export const ProductCard = ({ id, code, name, price, onDelete }: productProps) =
           </Link>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {code}
+              {name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {name}

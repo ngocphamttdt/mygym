@@ -7,7 +7,7 @@ export interface FormValues {
 
 export interface IObject {
   label: string
-  value: string
+  value: number
 }
 
 export interface IFieldProps {

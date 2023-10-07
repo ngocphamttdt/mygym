@@ -5,7 +5,7 @@ import {
   SET_CATELOG_NAME
 } from '../constants/categoryConstants'
 
-export const categoryReducer = (state: IObject[], action: CategoryActions) => {
+export const categoryReducer = (state: { data: IObject[] }, action: CategoryActions) => {
   switch (action.type) {
     case SET_CATEGORY_ID:
       return {

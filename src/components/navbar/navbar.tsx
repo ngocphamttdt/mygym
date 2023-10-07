@@ -20,7 +20,7 @@ import { IUser } from 'components/models/userInterface';
 import { AuthActions } from 'store/actions/authActions';
 import { USER_SIGNOUT } from 'store/constants/authConstants';
 
-const pages = ['Home', 'Product', 'Chart', 'API'];
+const pages = ['Home', 'Product', 'Chart', 'API', 'Social'];
 
 const Navbar = () => {
   const navigate = useNavigate()

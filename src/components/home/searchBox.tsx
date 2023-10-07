@@ -26,7 +26,7 @@ export const SearchingBox = ({ onSearchProduct }: ISearchingParams) => {
     onSearchProduct(
       {
         name: nameRef.current?.value,
-        categoryId: selectedCategory,
+        categoryId: +selectedCategory,
         price: productPrice
       } as IProduct
     )

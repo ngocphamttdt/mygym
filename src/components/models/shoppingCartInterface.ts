@@ -1,5 +1,5 @@
 export interface IShoppingItem {
-  id: string
+  id: number
   productName: string
   price: number
   count: number
@@ -7,8 +7,8 @@ export interface IShoppingItem {
 
 export interface IShoppingDetailProps {
   shoppingItems: IShoppingItem[]
-  onChangeCount: (increase: boolean, itemId: string) => void
-  onDelete: (itemId: string) => void
+  onChangeCount: (increase: boolean, itemId: number) => void
+  onDelete: (itemId: number) => void
 }
 
 export interface IShoppingTotal {

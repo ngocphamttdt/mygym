@@ -18,6 +18,8 @@ interface IUpdateCount {
 }
 
 function reducer(state: IShoppingData, action: IUpdateCount) {
+  console.log('state', state);
+
   switch (action.type) {
     case INCREMENTED_COUNT:
       return {
@@ -51,14 +53,14 @@ export const ShoppingCart = () => {
 
   const addressRef = useRef<HTMLInputElement>(null)
 
-  const handleChangeCount = useCallback((increase: boolean, prodId: string) => {
+  const handleChangeCount = useCallback((increase: boolean, prodId: number) => {
     const newItem = getShoppingItemByProdId(prodId, state.data)
     increase ?
       dispatch({ type: INCREMENTED_COUNT, payload: newItem })
       : dispatch({ type: DECREMENTE_COUNT, payload: newItem })
   }, [])
 
-  const handleDelete = useCallback((prodId: string) => {
+  const handleDelete = useCallback((prodId: number) => {
     dispatch({ type: DELETE_ITEM, payload: getShoppingItemByProdId(prodId, state.data) })
   }, [])
 
@@ -75,7 +77,7 @@ export const ShoppingCart = () => {
     return info
   }, [state])
 
-  const getShoppingItemByProdId = (prodId: string, shoppingItems: IShoppingItem[]): IShoppingItem =>
+  const getShoppingItemByProdId = (prodId: number, shoppingItems: IShoppingItem[]): IShoppingItem =>
     shoppingItems.find(x => x.id === prodId) as IShoppingItem
 
   const handleUpdateAdress = () => {

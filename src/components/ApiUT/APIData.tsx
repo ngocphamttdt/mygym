@@ -1,4 +1,5 @@
 import { Button } from "@mui/material"
+import { get } from "api/apiHelper"
 import { IPhoto } from "components/models/photo"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
@@ -39,13 +40,16 @@ const Item: any = styled.div`
   justify-content: center;
 `
 
+
 export const APIData = () => {
   const [photos, setPhotos] = useState<IPhoto[]>()
 
   const getAll = () => {
+    //https://6421599086992901b2b1200b.mockapi.io/getAll
     const getAllPromise = new Promise((resolve, reject) => {
       try {
-        fetch('https://6421599086992901b2b1200b.mockapi.io/getAll').then(res => res.json())
+        fetch('https://6421599086992901b2b1200b.mockapi.io/getAll')
+          .then(res => res.json())
           .then(data => resolve(data))
       } catch (error) {
         reject(error)
@@ -53,10 +57,17 @@ export const APIData = () => {
     })
     return getAllPromise
   }
+
+  const getCategory = async () => {
+    const data = await get('https://localhost:7137/api/category')
+    console.log('data', data);
+
+  }
   useEffect(() => {
     getAll().then(data => setPhotos(data as IPhoto[]))
       .catch(err => err)
 
+    getCategory()
     return () => { }
   }, [])
   return (
