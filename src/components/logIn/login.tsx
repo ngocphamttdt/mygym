@@ -1,11 +1,11 @@
 
 import { Box, Button, FormControl, Grid, Modal, TextField, Typography } from "@mui/material"
 import { IUser } from "components/models/userInterface";
-import { getUser } from "db/repositories/users";
 import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux";
 import { AuthActions } from "store/actions/authActions";
 import { red } from '@mui/material/colors';
+import { post } from "api/apiHelper";
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -34,14 +34,27 @@ export const Login = ({ onClose }: ILoginProps) => {
   const passWRef = useRef<HTMLInputElement>()
 
 
-  const onSignIn = () => {
-    const users: IUser[] = getUser()
+  const onSignIn = async () => {
+
     const username = usernameRef.current?.value
     const password = passWRef.current?.value
-    const res = users.find(x => (x.name === username && x.password === password))
-    if (!res) setErrorSignIn(true)
+
+    const userLogin = {
+      userName: username,
+      password: password
+    } as IUser
+    const data = await post('https://localhost:7137/api/auth/login', userLogin)
+    console.log('auth', data);
+
+
+    if (!data) setErrorSignIn(true)
     else {
-      dispatch({ type: "USER_SIGNIN", payload: res } as AuthActions)
+      dispatch(
+        {
+          type: "USER_SIGNIN",
+          payload: { userName: username, token: data.token, refreshToken: data.refreshToken }
+        } as AuthActions
+      )
       handleClose()
     }
   }

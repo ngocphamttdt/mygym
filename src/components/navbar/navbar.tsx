@@ -187,7 +187,7 @@ const Navbar = () => {
                     onClose={handleCloseUserMenu}
                   >
                     <MenuItem onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">user: {authSelector.name}</Typography>
+                      <Typography textAlign="center">user: {authSelector.userName}</Typography>
                     </MenuItem>
                     <MenuItem onClick={handleSignOut}>
                       <Typography textAlign="center">Sign out</Typography>
