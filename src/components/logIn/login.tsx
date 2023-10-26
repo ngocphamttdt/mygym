@@ -88,7 +88,7 @@ export const Login = ({ onClose }: ILoginProps) => {
             </Grid>
             <Grid item xs={12}>
               <FormControl fullWidth>
-                <TextField id="outlined-basic" label="Password" variant="outlined" inputRef={passWRef} />
+                <TextField id="outlined-basic" type="password" label="Password" variant="outlined" inputRef={passWRef} />
               </FormControl>
             </Grid>
           </Grid>

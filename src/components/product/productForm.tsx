@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ADD_PRODUCT, UPDATE_PRODUCT } from 'store/constants/productConstants';
 import { get, post, put } from 'api/apiHelper';
+import { IUser } from 'components/models/userInterface';
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required('Name is required'),
@@ -33,6 +34,7 @@ export const ProductForm = () => {
   const [categoryOptions, setCategoryOptions] = useState<IObject[]>()
   const categorySelector: IObject[] = useSelector((state: any) => state.category.data)
   const productSelector: IProduct[] = useSelector((state: any) => state.products.data)
+  const authSelector: IUser = useSelector((state: any) => state.auth.data)
 
   const [initProduct, setInitProduct] = useState<IProduct>(initValues)
 
@@ -49,19 +51,19 @@ export const ProductForm = () => {
         id: +params.id
       } as IProduct
 
-      await put('https://localhost:7137/api/product', updatedProduct)
+      await put('https://localhost:7137/api/product', updatedProduct, authSelector.token)
 
       dispatch({ type: UPDATE_PRODUCT, payload: updatedProduct })
     }
     else {
-      await post('https://localhost:7137/api/product', newProduct)
+      await post('https://localhost:7137/api/product', newProduct, authSelector.token)
       dispatch({ type: ADD_PRODUCT, payload: newProduct })
     }
     navigate('/')
   }
 
   const fetchCategory = async () => {
-    const data = await get('https://localhost:7137/api/category')
+    const data = await get('https://localhost:7137/api/category', authSelector.token)
     const newCategoryOptions: IObject[] = data.map((item: any) => ({ value: item.id, label: item.name }))
     setCategoryOptions(newCategoryOptions)
   }

@@ -13,6 +13,7 @@ import { SearchingBox } from "./searchBox";
 import { ProductCard } from "../product";
 import { Loading } from "components/common";
 import { get, remove } from "api/apiHelper";
+import { IUser } from "components/models/userInterface";
 
 
 export const Home = () => {
@@ -25,6 +26,7 @@ export const Home = () => {
 
   const categorySelector: IObject[] = useSelector((state: any) => state.category.data)
   const productSelector: IProduct[] = useSelector((state: any) => state.products.data)
+  const authenSelector: IUser = useSelector((state: any) => state.auth.data)
 
   useEffect(() => {
     fetchProducts()
@@ -44,13 +46,13 @@ export const Home = () => {
   }, [products])
 
   const fetchCategory = async () => {
-    const data = await get('https://localhost:7137/api/category')
+    const data = await get('https://localhost:7137/api/category', authenSelector.token)
     setCategoryOptions(data.map((item: ICategory) => ({ value: item.id, label: item.name } as IObject)))
   }
 
   const fetchProducts = async () => {
     setProducts([])
-    const data = await get('https://localhost:7137/api/product')
+    const data = await get('https://localhost:7137/api/product', authenSelector.token)
     setProducts(data as IProduct[])
     setIsLoading(false)
   }
